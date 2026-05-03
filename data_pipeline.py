@@ -2,7 +2,7 @@ print("Sanity Check: The script is successfully running!")
 
 import yfinance as yf
 
-def get_live_stock_price(ticker_symbol):
+def get_market_pulse(ticker_symbol):
     print(f"Connecting to market data for :")
 
     stock = yf.Ticker(ticker_symbol) ## Ticker Object Creation
@@ -14,6 +14,19 @@ def get_live_stock_price(ticker_symbol):
     except Exception as e:
         print(f"Error fetching data for {ticker_symbol}.Error details: {e}")
 
+
+    print(f"\nLatest Market Headlines : ")
+    try :
+        news_articles = stock.news
+        for i,article in enumerate(news_articles[:3],start=1): 
+            title = article.get('title') or article.get('content', {}).get('title')
+            if title:
+                print(f"{i}. {title}")
+            else:
+                print(f"{i}. [Title Missing] Raw keys received: {list(article.keys())}")
+    except Exception as e:
+        print(f"Error fetching name :{e}")
+
 if __name__ == "__main__":
     ## Testing with apple 
-    get_live_stock_price("AAPL")
+    get_market_pulse("AAPL")
