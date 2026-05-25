@@ -3,7 +3,7 @@ langchain
 langchain-community
 chromadb
 langchain-text-splitters
-
+bs4
 
 
 
